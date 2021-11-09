@@ -48,14 +48,14 @@ while ! test -z "$(ps -A | grep -w ${FRP_NAME})"; do
 done
 
 mkdir -p ${FRP_PATH}
-wget -P ${WORK_PATH} https://ghproxy.com/https://github.com/fatedier/frp/releases/download/v${FRP_VERSION}/${FILE_NAME}.tar.gz -O ${FILE_NAME}.tar.gz && \
+wget -P ${WORK_PATH} https://hub.fastgit.org/fatedier/frp/releases/download/v${FRP_VERSION}/${FILE_NAME}.tar.gz -O ${FILE_NAME}.tar.gz && \
 tar -zxvf ${FILE_NAME}.tar.gz && \
 mv ${FILE_NAME}/${FRP_NAME} ${FRP_PATH}
 
-wget -P ${FRP_PATH} https://ghproxy.com/https://raw.githubusercontent.com/${REPO}/master/${FRP_NAME}.ini && \
-wget -P /lib/systemd/system https://ghproxy.com/https://raw.githubusercontent.com/${REPO}/master/${FRP_NAME}.service && \
-
+wget -P ${FRP_PATH} https://cdn.jsdelivr.net/gh/${REPO}@master/${FRP_NAME}.ini && \
+wget -P /lib/systemd/system https://cdn.jsdelivr.net/gh/${REPO}@master/${FRP_NAME}.service && \
 systemctl daemon-reload
+
 sudo systemctl start ${FRP_NAME}
 sudo systemctl enable ${FRP_NAME}
 rm -rf ${WORK_PATH}/${FILE_NAME}.tar.gz ${WORK_PATH}/${FILE_NAME} ${FRP_NAME}_linux_install.sh
